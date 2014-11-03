@@ -122,7 +122,7 @@ elif platform.startswith('linux-gcc'):
     env['SHARED_LIB_ENABLED'] = False
 elif platform.startswith('darwin'):
     env.Tool( 'default' )
-    env.Append( LIBS = ['pthread'], CCFLAGS = "-Wall" )
+    env.Append( LIBS = ['pthread'], CCFLAGS = "-Wall -arch i386 -iwithsysroot /Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.7" )
     env['SHARED_LIB_ENABLED'] = True
 else:
     print "UNSUPPORTED PLATFORM."
@@ -244,8 +244,5 @@ srcdist_cmd = env['SRCDIST_ADD']( source = """
     """.split() )
 env.Alias( 'src-dist', srcdist_cmd )
 
-buildProjectInDirectory( 'src/jsontestrunner' )
 buildProjectInDirectory( 'src/lib_json' )
-buildProjectInDirectory( 'src/test_lib_json' )
-#print env.Dump()
 
