@@ -623,6 +623,12 @@ Reader::decodeDouble( Token &token )
    const int bufferSize = 32;
    int count;
    int length = int(token.end_ - token.start_);
+    
+   // Sanity check to avoid buffer overflow exploits.
+   if (length < 0) {
+    return addError( "Unable to parse token length", token );
+   }
+    
    if ( length <= bufferSize )
    {
       Char buffer[bufferSize];

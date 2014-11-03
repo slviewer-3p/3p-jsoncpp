@@ -82,6 +82,12 @@ public:
 
       if ( length == unknown )
          length = (unsigned int)strlen(value);
+       
+       // Avoid an integer overflow in the call to malloc below by limiting length
+       // to a sane value.
+       if (length >= (unsigned)Value::maxInt)
+           length = Value::maxInt - 1;
+       
       char *newString = static_cast<char *>( malloc( length + 1 ) );
       memcpy( newString, value, length );
       newString[length] = 0;
