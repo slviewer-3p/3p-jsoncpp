@@ -18,7 +18,25 @@
         <key>common</key>
         <map>
           <key>build_directory</key>
-          <string>jsoncpp-src-0.5.0</string>
+          <string>stage</string>
+          <key>configurations</key>
+          <map>
+            <key>Release</key>
+            <map>
+              <key>build</key>
+              <map>
+                <key>arguments</key>
+                <array>
+                  <string>-c</string>
+                  <string>../build-cmd.sh</string>
+                </array>
+                <key>command</key>
+                <string>bash</string>
+              </map>
+              <key>name</key>
+              <string>Release</string>
+            </map>
+          </map>
           <key>manifest</key>
           <array>
             <string>include/json/*.h</string>
@@ -30,22 +48,15 @@
         <map>
           <key>configurations</key>
           <map>
-            <key>default</key>
+            <key>Release</key>
             <map>
               <key>build</key>
               <map>
-                <key>arguments</key>
-                <array>
-                  <string>scons.py</string>
-                  <string>platform=darwin</string>
-                </array>
-                <key>command</key>
-                <string>python</string>
               </map>
               <key>default</key>
-              <string>True</string>
+              <boolean>true</boolean>
               <key>name</key>
-              <string>default</string>
+              <string>Release</string>
             </map>
           </map>
           <key>manifest</key>
@@ -59,22 +70,15 @@
         <map>
           <key>configurations</key>
           <map>
-            <key>default</key>
+            <key>Release</key>
             <map>
               <key>build</key>
               <map>
-                <key>arguments</key>
-                <array>
-                  <string>scons.py</string>
-                  <string>platform=linux-gcc</string>
-                </array>
-                <key>command</key>
-                <string>python</string>
               </map>
               <key>default</key>
-              <string>True</string>
+              <boolean>true</boolean>
               <key>name</key>
-              <string>default</string>
+              <string>Release</string>
             </map>
           </map>
           <key>manifest</key>
@@ -88,62 +92,28 @@
         <map>
           <key>configurations</key>
           <map>
-            <key>Debug</key>
-            <map>
-              <key>build</key>
-              <map>
-                <key>arguments</key>
-                <array>
-                  <string>scons.py</string>
-                  <string>platform=msvc100debug</string>
-                </array>
-                <key>command</key>
-                <string>python</string>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>command</key>
-                <string>""%VS100COMNTOOLS%vsvars32.bat""</string>
-              </map>
-              <key>default</key>
-              <string>True</string>
-              <key>name</key>
-              <string>Debug</string>
-            </map>
             <key>Release</key>
             <map>
               <key>build</key>
               <map>
-                <key>arguments</key>
-                <array>
-                  <string>scons.py</string>
-                  <string>platform=msvc100</string>
-                </array>
-                <key>command</key>
-                <string>python</string>
-              </map>
-              <key>configure</key>
-              <map>
-                <key>command</key>
-                <string>""%VS100COMNTOOLS%vsvars32.bat""</string>
               </map>
               <key>default</key>
-              <string>True</string>
+              <boolean>true</boolean>
               <key>name</key>
               <string>Release</string>
             </map>
           </map>
           <key>manifest</key>
           <array>
-            <string>lib/release/*.lib</string>
             <string>lib/debug/*.lib</string>
+            <string>lib/release/*.lib</string>
           </array>
           <key>name</key>
           <string>windows</string>
         </map>
       </map>
       <key>version_file</key>
-      <string>../VERSION.txt</string>
+      <string>VERSION.txt</string>
     </map>
     <key>type</key>
     <string>autobuild</string>
