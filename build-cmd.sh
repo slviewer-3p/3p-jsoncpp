@@ -54,7 +54,7 @@ pushd "$JSONCPP_SOURCE_DIR"
             cp include/json/*.h "$stage/include/json"
         ;;
         "linux")
-            ./scons.py platform=linux
+            ./scons.py platform=linux-gcc
 
             mkdir -p "$stage/lib/release"
             mkdir -p "$stage/include/json"
