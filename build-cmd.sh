@@ -40,8 +40,8 @@ pushd "$JSONCPP_SOURCE_DIR"
             mkdir --parents "$stage/lib/release"
             mkdir --parents "$stage/include/json"
 
-            cp ./build/vs120/debug/lib_json/json_libmtd.lib "$stage/lib/debug"
-            cp ./build/vs120/release/lib_json/json_libmt.lib "$stage/lib/release"
+            cp ./build/vs120/debug/lib_json/json_libmdd.lib "$stage/lib/debug"
+            cp ./build/vs120/release/lib_json/json_libmd.lib "$stage/lib/release"
 
             cp ../"${JSONCPP_SOURCE_DIR}"/include/json/*.h "$stage/include/json"
         ;;
