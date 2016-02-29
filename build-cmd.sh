@@ -30,18 +30,18 @@ echo "${JSONCPP_VERSION}.${build}" > "${stage}/VERSION.txt"
 
 pushd "$JSONCPP_SOURCE_DIR"
     case "$AUTOBUILD_PLATFORM" in
-        "windows")
+        windows*)
             load_vsvars
 
-            build_sln "./makefiles/vs120/jsoncpp.sln" "Debug|Win32"
-            build_sln "./makefiles/vs120/jsoncpp.sln" "Release|Win32"
+            build_sln "./makefiles/vs120/jsoncpp.sln" "Release|$AUTOBUILD_WIN_VSPLATFORM"
 
-            mkdir --parents "$stage/lib/debug"
             mkdir --parents "$stage/lib/release"
             mkdir --parents "$stage/include/json"
 
-            cp ./build/vs120/debug/lib_json/json_libmdd.lib "$stage/lib/debug"
-            cp ./build/vs120/release/lib_json/json_libmd.lib "$stage/lib/release"
+            if [ "$AUTOBUILD_ADDRSIZE" = 32 ]
+            then cp ./build/vs120/release/lib_json/json_libmd.lib "$stage/lib/release"
+            else cp ./makefiles/vs120/x64/release/json_libmd.lib "$stage/lib/release"
+            fi
 
             cp ../"${JSONCPP_SOURCE_DIR}"/include/json/*.h "$stage/include/json"
         ;;
