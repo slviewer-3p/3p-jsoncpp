@@ -24,7 +24,7 @@ options.Add( EnumVariable('platform',
 try:
     platform = ARGUMENTS['platform']
     if platform == 'linux-gcc':
-        CXX = 'g++-4.1' # not quite right, but env is not yet available.
+        CXX = 'g++'
         import commands
         version = commands.getoutput('%s -dumpversion' %CXX)
         platform = 'linux-gcc-%s' %version
@@ -117,7 +117,7 @@ elif platform == 'mingw':
     env.Append( CPPDEFINES=[ "WIN32", "NDEBUG", "_MT" ] )
 elif platform.startswith('linux-gcc'):
     env.Tool( 'default' )
-    env['CXX']='g++-4.1'
+    env['CXX']='g++'
     env.Append( LIBS = ['pthread'], CCFLAGS = "-Wall -m32", LINKFLAGS="-m32")
     env['SHARED_LIB_ENABLED'] = False
 elif platform.startswith('darwin'):
