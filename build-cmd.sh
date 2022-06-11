@@ -9,9 +9,9 @@ set -e
 # complain about unset env variables
 set -u
 
-JSONCPP_SOURCE_DIR="jsoncpp-src"
+JSONCPP_SOURCE_DIR="jsoncpp-1.9.5"
 # version number is conveniently found in a file with no other content
-JSONCPP_VERSION="$(<$JSONCPP_SOURCE_DIR/version)"
+JSONCPP_VERSION="1.9.5"
 
 if [ -z "$AUTOBUILD" ] ; then 
     exit 1
@@ -33,7 +33,7 @@ source_environment_tempfile="$stage/source_environment.sh"
 build=${AUTOBUILD_BUILD_ID:=0}
 echo "${JSONCPP_VERSION}.${build}" > "${stage}/VERSION.txt"
 
-pushd "$JSONCPP_SOURCE_DIR"
+pushd "$stage"
     case "$AUTOBUILD_PLATFORM" in
         windows*)
             load_vsvars
@@ -63,14 +63,15 @@ pushd "$JSONCPP_SOURCE_DIR"
         linux*)
             export CCFLAGS="-m$AUTOBUILD_ADDRSIZE $LL_BUILD_RELEASE"
             export CXXFLAGS="$CCFLAGS"
-            ./scons.py platform=linux-gcc
+	    cmake ../$JSONCPP_SOURCE_DIR
+	    make -j 6
 
             mkdir -p "$stage/lib/release"
             mkdir -p "$stage/include/json"
-            cp lib/release/*.a "$stage/lib/release"
-            cp include/json/*.h "$stage/include/json"
+            cp lib/*.a "$stage/lib/release"
+            cp ../$JSONCPP_SOURCE_DIR/include/json/*.h "$stage/include/json"
         ;;
     esac
     mkdir -p "$stage/LICENSES"
-    cp LICENSE "$stage/LICENSES/jsoncpp.txt"
+    cp ../$JSONCPP_SOURCE_DIR/LICENSE "$stage/LICENSES/jsoncpp.txt"
 popd
