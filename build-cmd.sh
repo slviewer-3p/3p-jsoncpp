@@ -63,14 +63,14 @@ pushd "$stage"
         linux*)
             export CCFLAGS="-m$AUTOBUILD_ADDRSIZE $LL_BUILD_RELEASE"
             export CXXFLAGS="$CCFLAGS"
-	    cmake ../$JSONCPP_SOURCE_DIR
-	    make -j 6
+			cmake ../$JSONCPP_SOURCE_DIR
+			make -j `nproc`
 
-            mkdir -p "$stage/lib/release"
-            mkdir -p "$stage/include/json"
-            cp lib/*.a "$stage/lib/release"
-            cp ../$JSONCPP_SOURCE_DIR/include/json/*.h "$stage/include/json"
-        ;;
+			mkdir -p "$stage/lib/release"
+			mkdir -p "$stage/include/json"
+			cp lib/*.a "$stage/lib/release"
+			cp ../$JSONCPP_SOURCE_DIR/include/json/*.h "$stage/include/json"
+			;;
     esac
     mkdir -p "$stage/LICENSES"
     cp ../$JSONCPP_SOURCE_DIR/LICENSE "$stage/LICENSES/jsoncpp.txt"
