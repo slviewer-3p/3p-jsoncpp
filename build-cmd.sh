@@ -61,7 +61,7 @@ pushd "$stage"
             cp include/json/*.h "$stage/include/json"
         ;;
         linux*)
-            export CCFLAGS="-m$AUTOBUILD_ADDRSIZE $LL_BUILD_RELEASE"
+            export CCFLAGS="${AUTOBUILD_GCC_ARCH} $LL_BUILD_RELEASE"
             export CXXFLAGS="$CCFLAGS"
 			cmake ../$JSONCPP_SOURCE_DIR
 			make -j `nproc`
